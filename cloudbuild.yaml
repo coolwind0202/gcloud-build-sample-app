@@ -1,0 +1,10 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  script: |
+    docker build -t asia-northeast1-docker.pkg.dev/$PROJECT_ID/$_REGISTRY_REPOSITORY/app:$COMMIT_SHA .
+images:
+- 'asia-northeast1-docker.pkg.dev/$PROJECT_ID/$_REGISTRY_REPOSITORY/app:$COMMIT_SHA'
+substitutions:
+  _REGISTRY_REPOSITORY: repo-summer-2024-k-takahashi
+options:
+  automapSubstitutions: true
