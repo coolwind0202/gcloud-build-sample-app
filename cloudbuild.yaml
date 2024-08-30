@@ -2,9 +2,35 @@ steps:
 - name: 'gcr.io/cloud-builders/docker'
   script: |
     docker build -t asia-northeast1-docker.pkg.dev/$PROJECT_ID/$_REGISTRY_REPOSITORY/app:$COMMIT_SHA .
+
+# 検知できるすべてのコンテナイメージ脆弱性を JSON でファイルに保存する
+- name: 'gcr.io/$PROJECT_ID/trivy'
+  args: [
+    'image',
+    '-f', 'json',
+    '-o', 'trivy-all-$BUILD_ID.json',
+    'asia-northeast1-docker.pkg.dev/$PROJECT_ID/$_REGISTRY_REPOSITORY/app:$COMMIT_SHA'
+  ]
+
+# 重大かつ修正パッチが存在する脆弱性を検出した場合はパイプラインを終了する
+- name: 'gcr.io/$PROJECT_ID/trivy'
+  args: [
+    'image',
+    '--severity', 'HIGH,CRITICAL',
+    '--ignore-unfixed',
+    '--exit-code', '1',
+    'asia-northeast1-docker.pkg.dev/$PROJECT_ID/$REGISTRY_REPOSITORY/app:$COMMIT_SHA'
+  ]
+
 images:
 - 'asia-northeast1-docker.pkg.dev/$PROJECT_ID/$_REGISTRY_REPOSITORY/app:$COMMIT_SHA'
+artifacts:
+  objects:
+    location: 'gs://$_BUCKET/'
+    paths: ['trivy-all-$COMMIT_SHA.json']
+
 substitutions:
   _REGISTRY_REPOSITORY: repo-summer-2024-k-takahashi
+  _BUCKET: sreake-summer-intern-2024-erable
 options:
   automapSubstitutions: true
