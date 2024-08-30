@@ -19,7 +19,7 @@ steps:
     '--severity', 'HIGH,CRITICAL',
     '--ignore-unfixed',
     '--exit-code', '1',
-    'asia-northeast1-docker.pkg.dev/$PROJECT_ID/$REGISTRY_REPOSITORY/app:$COMMIT_SHA'
+    'asia-northeast1-docker.pkg.dev/$PROJECT_ID/$_REGISTRY_REPOSITORY/app:$COMMIT_SHA'
   ]
 
 images:
