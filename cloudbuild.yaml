@@ -46,9 +46,6 @@ steps:
     'projects/sreake-intern/locations/asia-northeast1/keyRings/$_KEY_RING/cryptoKeys/$_KEY/cryptoKeyVersions/$_KEY_VERSION'
   ]
 
-
-images:
-- 'asia-northeast1-docker.pkg.dev/$PROJECT_ID/$_REGISTRY_REPOSITORY/app:$COMMIT_SHA'
 artifacts:
   objects:
     location: 'gs://$_BUCKET/'
