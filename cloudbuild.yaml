@@ -26,6 +26,15 @@ steps:
 - name: 'gcr.io/$PROJECT_ID/bandit'
   args: ['-r', '.']
 
+# Artifact Registryへのpush
+- id: 'publish'
+  name: 'gcr.io/cloud-builders/docker'
+  args: [
+    'push',
+    'asia-northeast1-docker.pkg.dev/$PROJECT_ID/$_REGISTRY_REPOSITORY/app:$COMMIT_SHA'
+  ]
+
+# 証明書の作成
 - id: 'create-attestation'
   name: 'gcr.io/$PROJECT_ID/binauthz-attestation:latest'
   args: [
