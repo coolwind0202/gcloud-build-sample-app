@@ -23,8 +23,8 @@ steps:
   ]
 
 # Banditによる検査
-- name: 'gcr.io/${PROJECT_ID}/bandit'
-  args: ['.']
+- name: 'gcr.io/$PROJECT_ID/bandit'
+  args: ['-r', '.']
 
 images:
 - 'asia-northeast1-docker.pkg.dev/$PROJECT_ID/$_REGISTRY_REPOSITORY/app:$COMMIT_SHA'
