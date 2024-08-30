@@ -22,6 +22,10 @@ steps:
     'asia-northeast1-docker.pkg.dev/$PROJECT_ID/$_REGISTRY_REPOSITORY/app:$COMMIT_SHA'
   ]
 
+# Banditによる検査
+- name: 'gcr.io/${PROJECT_ID}/bandit'
+  args: ['.']
+
 images:
 - 'asia-northeast1-docker.pkg.dev/$PROJECT_ID/$_REGISTRY_REPOSITORY/app:$COMMIT_SHA'
 artifacts:
