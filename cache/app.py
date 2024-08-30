@@ -13,7 +13,7 @@ from flask_debugtoolbar import DebugToolbarExtension
 
 app = Flask(__name__)
 
-app.config['SECRET_KEY'] = 'dev key'
+app.config['SECRET_KEY'] = 'dev key' # nosec B105
 
 app.config['CACHE_TYPE'] = 'simple'
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
