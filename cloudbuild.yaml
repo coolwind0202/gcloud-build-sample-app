@@ -26,6 +26,18 @@ steps:
 - name: 'gcr.io/$PROJECT_ID/bandit'
   args: ['-r', '.']
 
+- id: 'create-attestation'
+  name: 'gcr.io/$PROJECT_ID/binauthz-attestation:latest'
+  args: [
+    '--artifact-url',
+    'asia-northeast1-docker.pkg.dev/$PROJECT_ID/$_REGISTRY_REPOSITORY/app:$COMMIT_SHA',
+    '--attestor',
+    'projects/$PROJECT_ID/attestors/$_ATTESTOR',
+    '--keyversion',
+    'projects/sreake-intern/locations/asia-northeast1/keyRings/$_KEY_RING/cryptoKeys/$_KEY/cryptoKeyVersions/$_KEY_VERSION'
+  ]
+
+
 images:
 - 'asia-northeast1-docker.pkg.dev/$PROJECT_ID/$_REGISTRY_REPOSITORY/app:$COMMIT_SHA'
 artifacts:
@@ -36,5 +48,9 @@ artifacts:
 substitutions:
   _REGISTRY_REPOSITORY: repo-summer-2024-k-takahashi
   _BUCKET: sreake-summer-intern-2024-erable
+  _ATTESTOR: attestor-k-takahashi
+  _KEY_RING: cloud-build-k-takahashi
+  _KEY: for-cloud-build
+  _KEY_VERSION: 1
 options:
   automapSubstitutions: true
