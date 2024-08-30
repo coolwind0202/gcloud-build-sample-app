@@ -8,7 +8,7 @@ steps:
   args: [
     'image',
     '-f', 'json',
-    '-o', 'trivy-all-$BUILD_ID.json',
+    '-o', 'trivy-all-$COMMIT_SHA.json',
     'asia-northeast1-docker.pkg.dev/$PROJECT_ID/$_REGISTRY_REPOSITORY/app:$COMMIT_SHA'
   ]
 
