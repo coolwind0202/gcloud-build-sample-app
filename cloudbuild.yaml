@@ -51,6 +51,6 @@ substitutions:
   _ATTESTOR: attestor-k-takahashi
   _KEY_RING: cloud-build-k-takahashi
   _KEY: for-cloud-build
-  _KEY_VERSION: 1
+  _KEY_VERSION: '1'
 options:
   automapSubstitutions: true
